@@ -10,7 +10,7 @@ class Dsuser(models.Model):
     registered_datetime = models.DateTimeField(default=timezone.now, verbose_name='등록 시간')
 
     def __str__(self):
-        return self.title
+        return self.username
 
     class Meta:
         db_table = 'ds_user'
