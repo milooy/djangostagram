@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>Hello, {{dsuser.username}}!</h1>
 <div class="row">
     {% for post in posts %}
     <a href="{% url 'post' pk=post.pk %}" class="col-6" style="margin: 10px 0;">
@@ -9,8 +10,8 @@
             <div class="card-body">
                 <p class="card-text">
                     {{ post.text }}
-                    by {{ post.author.username }}
-                    <p>created: {{ post.created_date }}</p>
+                    <div>by 👤{{ post.author.username }}</div>
+                    <div>created: {{ post.created_date }}</div>
                 </p>
             </div>
         </div>

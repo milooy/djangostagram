@@ -8,6 +8,7 @@ class Post(models.Model):
     image_url = models.CharField(max_length=500, verbose_name='이미지 주소')
     text = models.TextField(max_length=500, verbose_name='내용')
     created_date = models.DateTimeField(default=timezone.now, verbose_name='작성일')
+    tags = models.ManyToManyField('tag.Tag', verbose_name='태그')
 
     def __str__(self):
         return self.text

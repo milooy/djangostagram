@@ -7,12 +7,15 @@ from django.http import Http404
 
 
 def timeline(request):
+    user_id = request.session.get('user')
+    dsuser = Dsuser.objects.get(pk=user_id)
+
     all_posts = Post.objects.all().order_by('-created_date')
     page = int(request.GET.get('p', 1))
     paginator = Paginator(all_posts, 4)
 
     posts = paginator.get_page(page)
-    return render(request, 'timeline.html', {'posts': posts})
+    return render(request, 'timeline.html', {'posts': posts, 'dsuser': dsuser})
 
 def post(request, pk):
     post = get_object_or_404(Post, pk=pk)
