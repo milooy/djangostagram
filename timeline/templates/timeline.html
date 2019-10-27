@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for post in posts %}
-<a href="{% url 'post' pk=post.pk %}">
-    <div class="card" style="width: 18rem;">
-        <img src="{{post.image_url}}" class="card-img-top">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-                {{ post.text }}
-                <p>created: {{ post.created_date }}</p>
-            </p>
+<div class="row">
+    {% for post in posts %}
+    <a href="{% url 'post' pk=post.pk %}" class="col-6" style="margin: 10px 0;">
+        <div class="card" style="width: 18rem;">
+            <img src="{{post.image_url}}" class="card-img-top" height="150px">
+            <div class="card-body">
+                <p class="card-text">
+                    {{ post.text }}
+                    by {{ post.author.username }}
+                    <p>created: {{ post.created_date }}</p>
+                </p>
+            </div>
         </div>
-    </div>
-</a>
-{% endfor %}
+    </a>
+    {% endfor %}
+</div>
 {% endblock %}

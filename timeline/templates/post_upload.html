@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>New post</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
+<h1>사진 올리기</h1>
+<form method="POST" action="/upload">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% ifequal field.name 'text' %}
+        <textarea class="form-control" name="{{ field.name }}" placeholder="{{ field.label }}"></textarea>
+        {% else %}
+        <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
+            placeholder="{{ field.label }}" name="{{ field.name }}" />
+        {% endifequal %}
+    </div>
+    {% if field.errors %}
+    <span style="color: red">{{ field.errors }}</span>
+    {% endif %}
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">글쓰기</button>
+</form>
+
 {% endblock %}
