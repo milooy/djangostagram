@@ -2,11 +2,11 @@ from django import forms
 from .models import Dsuser
 from django.contrib.auth.hashers import check_password
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     username = forms.CharField(
         error_messages={'required' : '아이디를 입력하세요'},
         max_length=32,
-        label="사용자 이름")
+        label="아이디")
     password = forms.CharField(
         error_messages={'required' : '비밀번호를 입력하세요'},
         widget=forms.PasswordInput,
@@ -16,8 +16,6 @@ class LoginForm(forms.ModelForm):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
-
-        print(username, password)
 
         if username and password:
             try:
@@ -30,7 +28,3 @@ class LoginForm(forms.ModelForm):
                 self.add_error('username', '비밀번호를 틀렸습니다')
             else:
                 self.user_id = dsuser.id
-
-    class Meta:
-        model = Dsuser
-        fields = ('username', 'password')

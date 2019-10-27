@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from .forms import PostForm
 from dsuser.models import Dsuser
+from tag.models import Tag
 from django.core.paginator import Paginator
 from django.http import Http404
 
@@ -32,12 +33,20 @@ def post_upload(request):
         if form.is_valid():
             user_id = request.session.get('user')
             dsuser = Dsuser.objects.get(pk=user_id)
+            tags = form.cleaned_data['tags'].split(',')
 
             post = Post()
             post.author = dsuser
             post.image_url = form.cleaned_data['image_url']
             post.text = form.cleaned_data['text']
             post.save()
+
+            for tag in tags:
+                if not tag:
+                    continue
+
+                _tag, _ = Tag.objects.get_or_create(name=tag)
+                post.tags.add(_tag)
             return redirect('/')
     else:
         form = PostForm()

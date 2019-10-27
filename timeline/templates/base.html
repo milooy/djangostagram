@@ -16,23 +16,23 @@
         <a class="navbar-brand" href="{% url 'timeline' %}">Djangostagram</a>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'timeline' %}">Home</a>
+                <a class="nav-link active" href="{% url 'timeline' %}">타임라인</a>
             </li>
             {% if request.session.user %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'post_upload' %}">
-                    <button type="button" class="btn btn-primary btn-sm">Upload</button>
+                    <button type="button" class="btn btn-primary btn-sm">글 작성</button>
                 </a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                <a class="nav-link" href="{% url 'register' %}">회원가입</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link" href="{% url 'login' %}">로그인</a>
             </li>
             {% endif %}
         </ul>

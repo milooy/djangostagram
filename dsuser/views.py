@@ -34,9 +34,6 @@ def register(request):
 
         res_data = {}
 
-        print("hi2")
-        print(username, useremail)
-
         if not (username and useremail and password and re_password):
             res_data['error'] = '모든 값을 입력해야합니다.'
         elif password != re_password:
