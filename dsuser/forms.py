@@ -17,6 +17,8 @@ class LoginForm(forms.ModelForm):
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
 
+        print(username, password)
+
         if username and password:
             try:
                 dsuser = Dsuser.objects.get(username=username)
