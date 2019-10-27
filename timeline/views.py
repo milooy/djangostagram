@@ -12,7 +12,7 @@ def post(request, pk):
     return render(request, 'post.html', {'post': post})
 
 def post_upload(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
             user_id = request.session.get('user')
