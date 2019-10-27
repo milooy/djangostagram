@@ -16,13 +16,18 @@
         <a class="navbar-brand" href="#">Djangostagram</a>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link active" href="{% url 'timeline' %}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">My list</a>
+                <a class="nav-link" href="{% url 'post_upload' %}">My list</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="{% url 'post_upload' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'post_upload' %}">
+                    <button type="button" class="btn btn-primary btn-sm">Upload</button>
+                </a>
             </li>
         </ul>
     </nav>
