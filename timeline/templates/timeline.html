@@ -5,7 +5,7 @@
     {% for post in posts %}
     <a href="{% url 'post' pk=post.pk %}" class="col-6" style="margin: 10px 0;">
         <div class="card" style="width: 18rem;">
-            <img src="{{post.image_url}}" class="card-img-top" height="150px">
+            <img src="{{post.image_url}}" class="card-img-top" height="170px">
             <div class="card-body">
                 <p class="card-text">
                     {{ post.text }}
@@ -16,5 +16,34 @@
         </div>
     </a>
     {% endfor %}
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?p={{ posts.previous_page_number }}">이전으로</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">이전으로</a>
+                </li>
+                {% endif %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ posts.number }} / {{ posts.paginator.num_pages }}</a>
+                </li>
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?p={{ posts.next_page_number }}">다음으로</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link disabled" href="#">다음으로</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </div>
 {% endblock %}

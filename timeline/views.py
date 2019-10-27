@@ -7,7 +7,11 @@ from django.http import Http404
 
 
 def timeline(request):
-    posts = Post.objects.all().order_by('-created_date')
+    all_posts = Post.objects.all().order_by('-created_date')
+    page = int(request.GET.get('p', 1))
+    paginator = Paginator(all_posts, 4)
+
+    posts = paginator.get_page(page)
     return render(request, 'timeline.html', {'posts': posts})
 
 def post(request, pk):
