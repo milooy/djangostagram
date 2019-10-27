@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Hello, {{dsuser.username}}!</h1>
+{% if dsuser %}
+    <h1>Hello, {{dsuser.username}}!</h1>
+{% endif %}
 <div class="row">
     {% for post in posts %}
     <a href="{% url 'post' pk=post.pk %}" class="col-6" style="margin: 10px 0;">

@@ -8,7 +8,9 @@ from django.http import Http404
 
 def timeline(request):
     user_id = request.session.get('user')
-    dsuser = Dsuser.objects.get(pk=user_id)
+    dsuser = None
+    if user_id:
+        dsuser = Dsuser.objects.get(pk=user_id)
 
     all_posts = Post.objects.all().order_by('-created_date')
     page = int(request.GET.get('p', 1))
@@ -25,11 +27,7 @@ def post_upload(request):
     if not request.session.get('user'):
         return redirect('/user/login/')
 
-    print("뭐냐")
-    print(request.method)
-
     if request.method == 'POST':
-        print("여기 들어가니")
         form = PostForm(request.POST)
         if form.is_valid():
             user_id = request.session.get('user')
